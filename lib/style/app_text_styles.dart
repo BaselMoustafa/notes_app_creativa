@@ -38,4 +38,8 @@ abstract class AppTextStyles {
   static const TextStyle regular18 = TextStyle(
     fontSize: 18
   );
+
+  static const TextStyle regular22 = TextStyle(
+    fontSize: 22
+  );
 }
