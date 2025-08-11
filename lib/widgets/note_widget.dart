@@ -20,11 +20,47 @@ class NoteWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                note.title,
-                style: AppTextStyles.bold22,
+              Expanded(
+                child: Text(
+                  note.title,
+                  style: AppTextStyles.bold22,
+                
+                ),
               ),
+
+              PopupMenuButton<VoidCallback>(
+                color: AppColors.primary,
+                iconColor: AppColors.primary,
+                onSelected: (VoidCallback toExcute) {
+                  toExcute.call();
+                },
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      value: (){
+                        print("Edit");
+                      },
+                      child: _ActionButton(
+                        iconData: Icons.edit, 
+                        title: "Edit",
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: (){
+                        print("Delete");
+                      },
+                      child: _ActionButton(
+                        iconData: Icons.delete, 
+                        title: "Delete",
+                      ),
+                    ),
+                  ];
+                },
+              )
+
             ],
           ),
 
@@ -51,4 +87,33 @@ class NoteWidget extends StatelessWidget {
     );
   }
 
+}
+
+class _ActionButton extends StatelessWidget {
+  const _ActionButton({
+    required this.iconData,
+    required this.title
+  });
+
+  final IconData iconData;
+  final String title;  
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 5,
+      children: [
+        Icon(
+          iconData,
+          color: AppColors.white,
+        ),
+        Text(
+          title,
+          style: AppTextStyles.regular16.copyWith(
+            color: AppColors.white
+          ),
+        )
+      ],
+    );
+  }
 }
