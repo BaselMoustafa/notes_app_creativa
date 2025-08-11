@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_app_creativa/models/note.dart';
 import 'package:notes_app_creativa/style/app_colors.dart';
 import 'package:notes_app_creativa/style/app_text_styles.dart';
+import 'package:notes_app_creativa/widgets/home_screen_floating_action_button.dart';
 import 'package:notes_app_creativa/widgets/notes_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,6 +21,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: NotesListView(notes: notes),
+      floatingActionButton: HomeScreenFloatingActionButton(),
     );
   }
 
