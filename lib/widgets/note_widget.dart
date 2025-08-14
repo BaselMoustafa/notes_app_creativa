@@ -9,10 +9,12 @@ class NoteWidget extends StatelessWidget {
     super.key,
     required this.note,
     required this.onSetNote,
+    required this.onDeleteNote,
   });
 
   final Note note;
   final void Function(Note note) onSetNote;
+  final void Function(Note note) onDeleteNote;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class NoteWidget extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       value: (){
-                        print("Delete");
+                        onDeleteNote(note);
                       },
                       child: _ActionButton(
                         iconData: Icons.delete, 

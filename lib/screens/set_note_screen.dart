@@ -4,6 +4,7 @@ import 'package:notes_app_creativa/style/app_colors.dart';
 import 'package:notes_app_creativa/style/app_text_styles.dart';
 import 'package:notes_app_creativa/widgets/custom_button.dart';
 import 'package:notes_app_creativa/widgets/custom_text_form_field.dart';
+import 'package:uuid/uuid.dart';
 
 class SetNoteScreen extends StatefulWidget {
   const SetNoteScreen({
@@ -117,6 +118,7 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
 
                       widget.onSetNote(
                         Note(
+                          id: widget.note?.id??Uuid().v4(),
                           title: titleController.text,
                           content: contentController.text
                         )

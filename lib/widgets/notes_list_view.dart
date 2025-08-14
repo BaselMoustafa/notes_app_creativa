@@ -7,11 +7,13 @@ class NotesListView extends StatelessWidget {
     super.key,
     required this.notes,
     required this.onSetNote,
+    required this.onDeleteNote
   });
 
 
   final void Function(Note note) onSetNote;
   final List<Note> notes;
+  final void Function(Note note) onDeleteNote;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class NotesListView extends StatelessWidget {
       }, 
       itemBuilder: (context,index){
         return NoteWidget(
+          onDeleteNote: onDeleteNote,
           onSetNote: onSetNote,
           note: notes[index],
         );
