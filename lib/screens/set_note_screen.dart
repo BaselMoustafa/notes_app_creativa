@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_app_creativa/models/note.dart';
 import 'package:notes_app_creativa/style/app_colors.dart';
 import 'package:notes_app_creativa/style/app_text_styles.dart';
+import 'package:notes_app_creativa/widgets/custom_button.dart';
 import 'package:notes_app_creativa/widgets/custom_text_form_field.dart';
 
 class SetNoteScreen extends StatefulWidget {
@@ -62,6 +63,13 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
               hintText: "Write Your Content Here...",
               maxLines: 7,
             ),
+
+            CustomButton(
+              title: "Save",
+              onTap: () {
+                print("Saved====");
+              },
+            )
           ],
         ),
       ),
