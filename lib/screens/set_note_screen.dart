@@ -9,9 +9,11 @@ class SetNoteScreen extends StatefulWidget {
   const SetNoteScreen({
     super.key,
     required this.note,
+    required this.onSetNote,
   });
 
   final Note? note;
+  final void Function(Note settedNote) onSetNote;
 
   @override
   State<SetNoteScreen> createState() => _SetNoteScreenState();
@@ -96,14 +98,7 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
                 ),
               ),
             ),
-      
-            // SliverToBoxAdapter(
-            //   child: Container(
-            //     height: 500,
-            //     color: Colors.red,
-            //   ),
-            // ),
-                  
+
             SliverFillRemaining(
               hasScrollBody: false,
               child: Align(
@@ -114,12 +109,22 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
                     vertical: 20 
                   ),
                   child: CustomButton(
-                        title: "Save",
-                        onTap: () {
-                          print("Saved====");
-                          formKey.currentState!.validate();
-                        },
-                      ),
+                    title: "Save",
+                    onTap: () {
+                      if (! formKey.currentState!.validate()) {
+                        return ;
+                      }
+
+                      widget.onSetNote(
+                        Note(
+                          title: titleController.text,
+                          content: contentController.text
+                        )
+                      );
+
+                      Navigator.of(context).pop();
+                    },
+                  ),
                 ),
               ),
             )

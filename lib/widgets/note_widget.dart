@@ -8,9 +8,11 @@ class NoteWidget extends StatelessWidget {
   const NoteWidget({
     super.key,
     required this.note,
+    required this.onSetNote,
   });
 
   final Note note;
+  final void Function(Note note) onSetNote;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,10 @@ class NoteWidget extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
-                              return SetNoteScreen(note: note);
+                              return SetNoteScreen(
+                                note: note,
+                                onSetNote: onSetNote,
+                              );
                             },
                           )
                         );

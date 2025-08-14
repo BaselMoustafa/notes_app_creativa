@@ -26,9 +26,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: NotesListView(notes: notes),
-      floatingActionButton: HomeScreenFloatingActionButton(),
+      body: NotesListView(notes: notes,onSetNote: setNote,),
+      floatingActionButton: HomeScreenFloatingActionButton(
+        onSetNote: setNote,
+      ),
     );
+  }
+
+  void setNote(Note note){
+    print("Will Set Note At Home====");
+    print(note.title);
+    print(note.content);
   }
 
   final List<Note> notes=[

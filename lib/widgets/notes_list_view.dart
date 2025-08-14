@@ -6,8 +6,11 @@ class NotesListView extends StatelessWidget {
   const NotesListView({
     super.key,
     required this.notes,
+    required this.onSetNote,
   });
 
+
+  final void Function(Note note) onSetNote;
   final List<Note> notes;
 
   @override
@@ -20,6 +23,7 @@ class NotesListView extends StatelessWidget {
       }, 
       itemBuilder: (context,index){
         return NoteWidget(
+          onSetNote: onSetNote,
           note: notes[index],
         );
       }, 
