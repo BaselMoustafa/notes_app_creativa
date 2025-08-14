@@ -20,6 +20,7 @@ class SetNoteScreen extends StatefulWidget {
 class _SetNoteScreenState extends State<SetNoteScreen> {
   final TextEditingController titleController=TextEditingController();
   final TextEditingController contentController=TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   void dispose() {
@@ -41,36 +42,42 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
 
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: [
-            Text(
-              "Title",
-              style: AppTextStyles.regular22,
-            ),
-        
-            CustomTextFormField(
-              controller: titleController,
-              hintText: "Write Your Title Here...",
-            ),
-        
-            Text(
-              "Content",
-              style: AppTextStyles.regular22,
-            ),
-
-            CustomTextFormField(
-              controller: contentController,
-              hintText: "Write Your Content Here...",
-              maxLines: 7,
-            ),
-
-            CustomButton(
-              title: "Save",
-              onTap: () {
-                print("Saved====");
-              },
-            )
-          ],
+        child: Form(
+          key: formKey,
+          child: ListView(
+            children: [
+              Text(
+                "Title",
+                style: AppTextStyles.regular22,
+              ),
+          
+              CustomTextFormField(
+                controller: titleController,
+                hintText: "Write Your Title Here...",
+              ),
+          
+              Text(
+                "Content",
+                style: AppTextStyles.regular22,
+              ),
+          
+              CustomTextFormField(
+                controller: contentController,
+                hintText: "Write Your Content Here...",
+                maxLines: 7,
+              ),
+          
+             
+          
+              CustomButton(
+                title: "Save",
+                onTap: () {
+                  print("Saved====");
+                  formKey.currentState!.validate();
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

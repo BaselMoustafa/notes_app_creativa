@@ -23,6 +23,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Widget build(BuildContext context) {
     return TextFormField(
       minLines: 1,
+      validator: (value) {
+        if (value==null || value.trim().isEmpty) {
+          return "Req";
+        }
+        return null;
+      },
       maxLines: widget.maxLines,
       controller: widget.controller,
       decoration: InputDecoration(
