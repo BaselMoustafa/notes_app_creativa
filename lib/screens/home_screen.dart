@@ -5,10 +5,16 @@ import 'package:notes_app_creativa/style/app_text_styles.dart';
 import 'package:notes_app_creativa/widgets/home_screen_floating_action_button.dart';
 import 'package:notes_app_creativa/widgets/notes_list_view.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +31,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  List<Note> get notes=>[
+  final List<Note> notes=[
     Note(
       title:"Client Feedback - Mobile App Redesign", 
       content:"Positive feedback on the login screen; change header font."
@@ -84,5 +90,4 @@ class HomeScreen extends StatelessWidget {
     ),
 
   ];
-
 }

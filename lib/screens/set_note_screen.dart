@@ -23,6 +23,14 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
+  void initState() {
+    super.initState();
+    titleController.text = widget.note?.title ?? "";
+    contentController.text=widget.note?.content ??"";
+
+  }
+
+  @override
   void dispose() {
     titleController.dispose();
     contentController.dispose();
@@ -40,44 +48,82 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
         ),
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Form(
-          key: formKey,
-          child: ListView(
-            children: [
-              Text(
-                "Title",
-                style: AppTextStyles.regular22,
+      body: Form(
+        key: formKey,
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10
+                ),
+                child: Text(
+                  "Title",
+                  style: AppTextStyles.regular22,
+                ),
               ),
-          
-              CustomTextFormField(
-                controller: titleController,
-                hintText: "Write Your Title Here...",
+            ),
+        
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: CustomTextFormField(
+                  controller: titleController,
+                  hintText: "Write Your Title Here...",
+                ),
               ),
-          
-              Text(
-                "Content",
-                style: AppTextStyles.regular22,
+            ),
+        
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  "Content",
+                  style: AppTextStyles.regular22,
+                ),
               ),
-          
-              CustomTextFormField(
-                controller: contentController,
-                hintText: "Write Your Content Here...",
-                maxLines: 7,
+            ),
+        
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10
+                ),
+                child: CustomTextFormField(
+                  controller: contentController,
+                  hintText: "Write Your Content Here...",
+                  maxLines: 7,
+                ),
               ),
-          
-             
-          
-              CustomButton(
-                title: "Save",
-                onTap: () {
-                  print("Saved====");
-                  formKey.currentState!.validate();
-                },
-              )
-            ],
-          ),
+            ),
+      
+            // SliverToBoxAdapter(
+            //   child: Container(
+            //     height: 500,
+            //     color: Colors.red,
+            //   ),
+            // ),
+                  
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 20 
+                  ),
+                  child: CustomButton(
+                        title: "Save",
+                        onTap: () {
+                          print("Saved====");
+                          formKey.currentState!.validate();
+                        },
+                      ),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_creativa/models/note.dart';
+import 'package:notes_app_creativa/screens/set_note_screen.dart';
 import 'package:notes_app_creativa/style/app_colors.dart';
 import 'package:notes_app_creativa/style/app_text_styles.dart';
 
@@ -41,7 +42,13 @@ class NoteWidget extends StatelessWidget {
                   return [
                     PopupMenuItem(
                       value: (){
-                        print("Edit");
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SetNoteScreen(note: note);
+                            },
+                          )
+                        );
                       },
                       child: _ActionButton(
                         iconData: Icons.edit, 
