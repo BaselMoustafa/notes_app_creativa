@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_creativa/models/note.dart';
+import 'package:notes_app_creativa/services/notes_service.dart';
 import 'package:notes_app_creativa/style/app_colors.dart';
 import 'package:notes_app_creativa/style/app_text_styles.dart';
 import 'package:notes_app_creativa/widgets/custom_button.dart';
 import 'package:notes_app_creativa/widgets/custom_text_form_field.dart';
-import 'package:uuid/uuid.dart';
 
 class SetNoteScreen extends StatefulWidget {
   const SetNoteScreen({
@@ -111,20 +111,41 @@ class _SetNoteScreenState extends State<SetNoteScreen> {
                   ),
                   child: CustomButton(
                     title: "Save",
-                    onTap: () {
+                    onTap: () async{
                       if (! formKey.currentState!.validate()) {
                         return ;
                       }
 
-                      widget.onSetNote(
-                        Note(
-                          id: widget.note?.id??Uuid().v4(),
-                          title: titleController.text,
-                          content: contentController.text
-                        )
-                      );
+                      final service = NotesService();
+                      Note? settedNote;
 
-                      Navigator.of(context).pop();
+                      if (widget.note ==null) {
+                        settedNote = await service.addNote(
+                          title: titleController.text, 
+                          content: contentController.text,
+                        );
+                      }else{
+                        settedNote = await service.editNote(
+                          Note(
+                            id: widget.note!.id,
+                            title: titleController.text, 
+                            content: contentController.text,
+                          )
+                        );
+                      }
+
+                      if (settedNote!=null) {
+                        widget.onSetNote(
+                          settedNote
+
+                        );
+                        Navigator.of(context).pop();
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Please Try Again"))
+                        );
+                      }
+                      
                     },
                   ),
                 ),

@@ -7,10 +7,12 @@ class NotesService {
   final String _boxName = "notes";
   Future<List<Note>?> getNotes()async{
     try {
+      await Future.delayed(Duration(seconds: 1));
       return Hive.box(_boxName).values.map(
         (ele)=> Note.fromMap(ele)
       ).toList();
     } catch (e) {
+      print(e);
       return null;
     }
   }

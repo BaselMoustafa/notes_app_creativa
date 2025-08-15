@@ -5,7 +5,7 @@ import 'package:notes_app_creativa/screens/home_screen.dart';
 void main(List<String> args)async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox("test");
+  await Hive.openBox("notes");
   runApp(
     _MyApp()
   );

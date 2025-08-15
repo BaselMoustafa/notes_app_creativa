@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app_creativa/models/note.dart';
 import 'package:notes_app_creativa/screens/set_note_screen.dart';
+import 'package:notes_app_creativa/services/notes_service.dart';
 import 'package:notes_app_creativa/style/app_colors.dart';
 import 'package:notes_app_creativa/style/app_text_styles.dart';
 
@@ -63,8 +64,16 @@ class NoteWidget extends StatelessWidget {
                       ),
                     ),
                     PopupMenuItem(
-                      value: (){
-                        onDeleteNote(note);
+                      value: ()async{
+                        final serivice = NotesService();
+                        bool isDeleted = await serivice.deleteNote(note);
+                        if (isDeleted) {
+                          onDeleteNote(note);
+                        }else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Please Try Again"))
+                          );
+                        }
                       },
                       child: _ActionButton(
                         iconData: Icons.delete, 

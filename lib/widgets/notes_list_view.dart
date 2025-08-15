@@ -17,6 +17,9 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (notes.isEmpty) {
+      return Text("There Are No Notes");
+    }
     return ListView.separated(
       padding: EdgeInsets.all(10),
       itemCount: notes.length,
